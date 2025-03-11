@@ -38,49 +38,48 @@ def evaluate_classification(model, dataloader, device=torch.device('cpu')):
 
 
 # Evaluate Named Entity Recognition (NER) performance
-def evaluate_ner(model, dataloader, id_to_label, device=torch.device('cpu')):
-    model.to(device)
+def evaluate_ner(model, dataloader, id_to_label, device=torch.device("cpu")):
     model.eval()
     all_preds = []
     all_labels = []
 
     with torch.no_grad():
         for batch_inputs, batch_labels in dataloader:
-            batch_inputs = {k: v.to(device) for k, v in batch_inputs.items()}  # Move to device
-            batch_labels = batch_labels.to(device)  # Move labels to device
-
-            # Forward pass
+            batch_inputs = {k: v.to(device) for k, v in batch_inputs.items()}
+            batch_labels = batch_labels.to(device)
             _, ner_logits = model(**batch_inputs)
             preds = torch.argmax(ner_logits, dim=-1).cpu().numpy()
             labels = batch_labels.cpu().numpy()
 
-            for i in range(preds.shape[0]):  # Iterate over batch
+            for i in range(preds.shape[0]):
                 seq_preds = []
                 seq_labels = []
-                for j in range(preds.shape[1]):  # Iterate over sequence length
+                for j in range(preds.shape[1]):
                     if labels[i, j] != -100:  # Ignore padding tokens
-                        seq_preds.append(id_to_label.get(preds[i, j], "O"))  # Default to "O"
-                        seq_labels.append(id_to_label.get(labels[i, j], "O"))  # Default to "O"
+                        seq_preds.append(id_to_label.get(preds[i, j], "O"))  # Ensure default 'O'
+                        seq_labels.append(id_to_label.get(labels[i, j], "O"))
 
-                if seq_preds and seq_labels:
-                    all_preds.append(seq_preds)
-                    all_labels.append(seq_labels)
+                all_preds.append(seq_preds)
+                all_labels.append(seq_labels)
 
-    # **Debugging Outputs**
-    print(f"\nNER Evaluation Debugging:")
-    print(f"Total Sentences Evaluated: {len(all_preds)}")
-    if all_preds:
-        print(f"First Prediction Example: {all_preds[0]}")
+    # **DEBUGGING OUTPUT**
+    print("\nNER Evaluation Debugging:")
+    print(f"Total Sentences Evaluated: {len(all_labels)}")
     if all_labels:
+        print(f"First Prediction Example: {all_preds[0]}")
         print(f"First Label Example: {all_labels[0]}")
 
-    # **Check if predictions exist before calling seqeval_report**
-    if not all_preds or not all_labels:
-        print("Warning: No valid NER predictions found. Skipping classification report.")
-        return "No valid NER predictions available."
+    if not any(any(label != "O" for label in labels) for labels in all_labels):
+        print("⚠️ Warning: No Named Entities Found in Labels! Possible Dataset Issue.")
 
-    report = seqeval_report(all_labels, all_preds, mode='strict', scheme=IOB2)
-    return report
+    if not any(any(label != "O" for label in labels) for labels in all_preds):
+        print("⚠️ Warning: Model is Predicting Only 'O' Labels! Check Training.")
+
+    # **Ensure we don't pass an empty list to seqeval**
+    if not all_labels or not all_preds:
+        raise ValueError("Empty sequences found! Check dataset and model output.")
+
+    return seqeval_report(all_labels, all_preds, mode='strict', scheme=IOB2)
 
 
 # Function to control layer freezing/unfreezing

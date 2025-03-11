@@ -44,7 +44,7 @@ if __name__ == '__main__':
     classification_file = "data/raw/classification_sample.xlsx"
     ner_file = "data/raw/ner_sample.xlsx"
     classification_train_loader, classification_test_loader, ner_train_loader, ner_test_loader = demo_data_loading(
-        classification_file, ner_file, 0.01)
+        classification_file, ner_file, 0.1)
 
     # Classification inference demo
     for batch_inputs, batch_labels in classification_test_loader:
