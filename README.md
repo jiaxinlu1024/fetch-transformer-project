@@ -1,69 +1,63 @@
-## Project Overview
-This project contains implementations of [Project Name] with detailed explanations in a Jupyter Notebook and a structured Python script for execution.
+# **Fetch Transformer Project**
 
-## How to Review the Code
-You can explore the code in two ways:
-
-1. **Jupyter Notebook (`Fetch Exercise.ipynb`)**  
-   - Contains step-by-step implementations, explanations, and exercise requirements.  
-   - Ideal if you want a deeper understanding of the methodology and code logic.
-   - Follows a sequential workflow but may be less modular.
-
-2. **Main Python Script (`main.py`)**  
-   - A more structured, modular implementation of the exercises.
-   - Easier to navigate between different parts of the project.
-   - Best for testing and running the project efficiently.
-
-## Getting Started
-To run the main script:
-```sh
-python main.py
+## **1. Project Structure**
 ```
-To explore the notebook:
-```sh
-jupyter notebook "Fetch Exercise.ipynb"
+fetch_transformer_project/
+│-- data/                      # Contains datasets (raw & processed)
+│   ├── processed/             # Preprocessed datasets (cached for fast loading)
+│   ├── raw/                   # Raw datasets in XLSX format
+│-- datasets/                   # Custom dataset loaders and iterators
+│-- models/                     # Model architectures (sentence transformer, multi-task transformer)
+│-- utils/                      # Utility functions for data processing, training, and demos
+│-- main.py                      # Main entry point for running the project
+│-- Fetch Exercise.ipynb         # Jupyter Notebook with detailed explanations and results
+│-- README.md                    # Project documentation
+│-- requirements.txt              # Dependencies for running the project
 ```
-
-Feel free to choose the approach that best fits your needs!
 
 ---
-Would you like help formatting a README file with this content?
 
-# Code Review Guide
+## **2. Project Overview**
+This project implements a **multi-task sentence Transformer** for **classification and named entity recognition (NER)**. The implementation can be reviewed in two different ways:
 
-This project provides **two ways** to explore and review the codebase, each suited to different preferences:
+- **Jupyter Notebook (`Fetch Exercise.ipynb`)**  
+  A detailed, step-by-step implementation with explanations. Useful for understanding the logic and theory behind each step.
+  
+- **Python Script (`main.py`)**  
+  A structured, modular implementation that runs the full pipeline. Ideal for quick navigation and execution.
 
-- **Jupyter Notebook (`Fetch Exercise.ipynb`)** – a detailed, step-by-step implementation with extensive explanations (sequential execution).  
-- **Python Script (`main.py`)** – a clean, modular implementation of the same logic, organized into functions and classes for easier navigation.
+Both approaches achieve the same results. The notebook provides richer explanations, while the script is cleaner and more modular.
 
-## Jupyter Notebook (`Fetch Exercise.ipynb`)
+---
 
-The Jupyter Notebook contains a **narrative walkthrough** of the project. It intermixes explanatory text with code, allowing you to follow the thought process behind each step. This format is great for understanding *why* and *how* each part of the code works in sequence. Keep in mind that the notebook runs **linearly** – you execute cells one after another to reproduce the results and charts within.
+## **3. Installation and Running the Project**
+### **Prerequisites**
+- Python 3.10+
+- PyTorch (GPU recommended for training)
+- Other dependencies listed in `requirements.txt`
 
-**How to run the notebook:**  
-- Install the required libraries (as listed in the project requirements) and ensure you have Jupyter installed.  
-- Launch Jupyter Notebook or JupyterLab and open **`Fetch Exercise.ipynb`**.  
-- Run the notebook cells in order (for example, select **Run All** or execute cells one by one). This will load data, initialize models, and step through the analysis as documented in the notebook.  
-- Observe the outputs and read the markdown explanations to understand each stage of the implementation.
+### **Setup**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jiaxinlu1024/fetch-transformer-project.git
+   cd fetch-transformer-project
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Python Script (`main.py`)
+### **Running the Project**
+#### **Option 1: Running the Notebook**
+1. Start Jupyter Notebook:
+   ```bash
+   jupyter notebook
+   ```
+2. Open `Fetch Exercise.ipynb` and execute all cells sequentially.
 
-The Python script provides a **structured, modular** version of the code. All functionality is divided into functions and possibly classes, making it easy to read and maintain. This format is ideal if you want to jump directly into specific functions or if you prefer a traditional code layout. The modular approach means you can identify key components (like data loading, model definition, training loops, etc.) quickly without scrolling through narrative text. It’s easier to navigate **at a glance** and to reuse parts of the code in other projects or scripts.
-
-**How to run the script:**  
-- Make sure all required dependencies are installed (see the requirements or environment setup in the project documentation).  
-- Open a terminal or command prompt in the project directory.  
-- Run the script with Python:  
-  ```bash
-  python main.py
-  ```  
-- The script will execute the entire workflow in one go, using the default settings defined in the code. Watch the console output for progress messages, results, or any prompts. (If the script requires input arguments or configuration, refer to comments in `main.py` or documentation for guidance.)
-
-## Choosing an Option
-
-**For learning and step-by-step understanding**, use the Jupyter Notebook. It’s richly annotated and shows intermediate results, which is helpful for new readers. **For quick code reference or integration**, use the Python script. Its well-organized structure lets you find functions or sections easily and run the whole pipeline without manual intervention. Both options ultimately achieve the same results, so you can pick the one that fits your review style:
-
-- *Use the Notebook* if you prefer an in-depth explanation and don’t mind running code cell-by-cell.  
-- *Use the Script* if you want to see the program structure quickly or run everything with one command.
-
-Each approach complements the other, giving you flexibility in how you explore the project’s code. Enjoy reviewing the project in the way that works best for you!
+#### **Option 2: Running the Python Script**
+1. Execute the script:
+   ```bash
+   python main.py
+   ```
+2. The script runs the entire pipeline, with outputs displayed in the console.

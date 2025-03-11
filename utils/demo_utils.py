@@ -99,14 +99,6 @@ def demo_data_loading(classification_file, ner_file, sample_ratio=1.0):
     """
     Demonstrates loading of classification and NER datasets with optional sampling.
     Allows loading only a fraction of the dataset for quick testing.
-
-    Args:
-        classification_file (str): Path to classification dataset file.
-        ner_file (str): Path to NER dataset file.
-        sample_ratio (float): Fraction of data to sample (0.0 to 1.0).
-
-    Returns:
-        Tuple: Train/test DataLoaders for classification and NER tasks.
     """
     assert 0.0 < sample_ratio <= 1.0, "sample_ratio must be between 0 and 1"
 

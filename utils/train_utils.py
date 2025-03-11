@@ -1,10 +1,11 @@
-from sklearn.metrics import accuracy_score, classification_report
-from datasets.combined_task_iterator import CombinedTaskIterator
 import torch
 from tqdm import tqdm
+from sklearn.metrics import accuracy_score, classification_report
 from seqeval.metrics import classification_report as seqeval_report
 from seqeval.scheme import IOB2
+from datasets.combined_task_iterator import CombinedTaskIterator
 
+# Evaluate classification performance
 def evaluate_classification(model, dataloader, device=torch.device('cpu')):
     model.to(device)
     model.eval()
@@ -25,7 +26,7 @@ def evaluate_classification(model, dataloader, device=torch.device('cpu')):
     unique_classes = set(all_preds) | set(all_labels)
 
     if len(unique_classes) < 2:
-        print(f"⚠️ Warning: Only one class detected in predictions: {unique_classes}. Adjusting labels.")
+        print(f"Warning: Only one class detected in predictions: {unique_classes}. Adjusting labels.")
         target_names = [str(cls) for cls in unique_classes]  # Dynamically assign class names
     else:
         target_names = ["negative", "positive"]
@@ -75,7 +76,7 @@ def evaluate_ner(model, dataloader, id_to_label, device=torch.device('cpu')):
 
     # **Check if predictions exist before calling seqeval_report**
     if not all_preds or not all_labels:
-        print("⚠️ Warning: No valid NER predictions found. Skipping classification report.")
+        print("Warning: No valid NER predictions found. Skipping classification report.")
         return "No valid NER predictions available."
 
     report = seqeval_report(all_labels, all_preds, mode='strict', scheme=IOB2)
