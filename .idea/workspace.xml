@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98b868dd-f49a-4799-bbd9-a2d38d935ea0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/fetch-transformer-project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fetch Exercise.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Fetch Exercise.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/classification_sample.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/ner_sample.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/demo_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/demo_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/train_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/train_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
